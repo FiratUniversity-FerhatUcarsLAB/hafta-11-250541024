@@ -1,24 +1,35 @@
-public class Exercise4_3 {
+Bu soruda bilgisayar kullanmadan zoop, baffle ve ping metotlarının çıktısını bulmamız isteniyor.
 
-    public static void zoop() {
-        baffle();
-        System.out.print("You wugga ");
-        baffle();
-    }
+1. Stack Diyagramı (İlk ping çağrıldığında):
 
-    public static void main(String[] args) {
-        System.out.print("No, I ");
-        zoop();
-        System.out.print("I ");
-        baffle();
-    }
+main: Aktif.
 
-    public static void baffle() {
-        System.out.print("wug");
-        ping();
-    }
+zoop: Aktif. main tarafından çağrıldı.
 
-    public static void ping() {
-        System.out.println(".");
-    }
-}
+baffle: Aktif. zoop tarafından çağrıldı.
+
+ping: Aktif. baffle tarafından çağrıldı.
+
+2. Programın Tam Çıktısı: Kod System.out.print (yan yana) ve println (alt satıra geç) karışık kullanıyor. Dikkat edelim.
+
+main -> "No, I " (print)
+
+zoop -> baffle -> "wug" (print) -> ping -> "." (println)
+
+Şu anki çıktı: No, I wug. (alt satıra indi)
+
+zoop devam ediyor -> "You wugga " (print)
+
+zoop -> baffle -> "wug" (print) -> ping -> "." (println)
+
+Şu anki çıktı: You wugga wug. (alt satıra indi)
+
+main devam ediyor -> "I " (print)
+
+main -> baffle -> "wug" (print) -> ping -> "." (println)
+
+Şu anki çıktı: I wug. (alt satıra indi)
+
+No, I wug.
+You wugga wug.
+I wug.
