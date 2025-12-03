@@ -1,27 +1,46 @@
-public class Exercise4_5 {
+Kod: zoop metodu fred ve bob parametrelerini alıyor. Soru: zoop ikinci kez çağrıldığında durum nedir?.
 
-    public static void zoop(String fred, int bob) {
-        System.out.println(fred);
-        if (bob == 5) {
-            ping("not ");
-        } else {
-            System.out.println("!");
-        }
-    }
+Analiz:
 
-    public static void main(String[] args) {
-        int bizz = 5;
-        int buzz = 2;
-        zoop("just for", bizz);
-        clink(2 * buzz);
-    }
+main: zoop("just for", 5) çağırır (1. çağrı).
 
-    public static void clink(int fork) {
-        System.out.print("It's ");
-        zoop("breakfast ", fork);
-    }
+Bu çağrı biter.
 
-    public static void ping(String strangStrung) {
-        System.out.println("any " + strangStrung + "more ");
-    }
-}
+main: clink(2*2) yani clink(4) çağırır.
+
+clink: "It's " yazar ve zoop("breakfast", 4) çağırır (2. çağrı).
+
+Stack Diyagramı (2. zoop çağrısı anında):
+
+main:
+
+args: (boş dizi)
+
+bizz: 5
+
+buzz: 2
+
+clink:
+
+fork: 4
+
+zoop:
+
+fred: "breakfast"
+
+bob: 4
+
+Çıktı:
+
+zoop: "just for" -> bob (5) == 5 -> ping("not ") -> "any not more "
+
+clink: "It's " -> 2. zoop: "breakfast" -> bob (4) != 5 -> else -> "!"
+
+Tam Çıktı:
+
+Plaintext
+
+just for
+any not more 
+It's breakfast
+!
